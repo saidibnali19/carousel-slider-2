@@ -1,0 +1,124 @@
+/* Reset */
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+button{
+    font: inherit;
+}
+
+:root{
+    --clr-primary: 0 100% 100%;
+    --clr-secondary: 0 0% 0%;
+    --clr-dark: 25 50% 50%;
+    --clr-light: 0 0% 80%;
+
+    --fs-600: 5rem;
+    --fs-400: 1.125rem;
+
+    --ff-body: cursive;
+
+    --button-width: 2rem;
+
+    --padding: .5rem;
+}
+
+/* Utility classes */
+.bg-primary{
+    background-color: hsl(var(--clr-primary));
+}
+
+.bg-dark{
+    background-color: hsl(var(--clr-dark));
+}
+
+.bg-light{
+    background-color: hsl(var(--clr-light));
+}
+
+.text-secondary{
+    color: hsl(var(--clr-secondary))
+}
+
+.ff-body{
+    font-family: var(--ff-body);
+}
+
+.wrapper{
+    max-width: 45em;
+    margin-inline: auto;
+    padding-inline: var(--button-width);
+}
+
+.grid{
+    display: grid;
+}
+
+.flex{
+    display: flex;
+}
+
+/* Components */
+.slider-wrapper{
+    position: relative;
+    overflow: hidden;
+}
+
+.button{
+    font-size: var(--fs-600);
+    position: absolute;
+    z-index: 2;
+    
+    width: var(--button-width);
+    
+    border: 0;
+    border-radius: .25rem;
+    background-color: hsl(var(--clr-secondary) / .3);
+    color: hsl(var(--clr-primary) / .9);
+    transition: background-color 350ms, color 350ms;
+}
+
+.button:is(:hover, :focus) {
+    background-color: hsl(var(--clr-secondary) / .6);
+    color: hsl(var(--clr-primary));
+}
+
+.button-left{
+    inset: 0 auto 0 0;
+}
+
+.button-right{
+    inset: 0 0 0 auto;
+}
+
+.slider{
+    --slides-per-screen: 1;
+    --gap: 1rem;
+    --offset: 0;
+
+    gap: calc(var(--gap));
+    translate: calc(-100% * var(--offset));
+    transition: translate 350ms;
+}
+
+@media (width > 35em) {
+    .slider{
+        --slides-per-screen: 2;
+    }
+}
+
+@media (width > 45em) {
+    .slider{
+        --slides-per-screen: 3;
+    }
+}
+
+.slider__item{
+    aspect-ratio: 16 / 9;
+    place-items: center;
+    flex: 0 0 calc((100% - (var(--gap) * (var(--slides-per-screen) - 0))) / var(--slides-per-screen));
+}
